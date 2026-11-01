@@ -1,0 +1,73 @@
+{
+  "name": "tokenex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web,worker \"npm:dev:api\" \"npm:dev:web\" \"npm:dev:worker\"",
+    "dev:api": "tsx watch apps/api/src/server.ts",
+    "dev:web": "vite --config apps/web/vite.config.ts",
+    "dev:worker": "tsx watch apps/worker/src/index.ts",
+    "db:migrate": "tsx packages/db/migrate.ts",
+    "db:seed": "tsx packages/db/seed.ts",
+    "setup": "node scripts/bootstrap.mjs && docker compose up -d --wait db && npm run db:migrate && npm run db:seed",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && vite build --config apps/web/vite.config.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "start": "tsx apps/api/src/server.ts",
+    "worker": "tsx apps/worker/src/index.ts",
+    "check": "npm run build && npm test",
+    "format": "prettier --write apps packages tests scripts docs *.json *.ts *.yaml .github/workflows/*.yml",
+    "format:check": "prettier --check apps packages tests scripts docs *.json *.ts *.yaml .github/workflows/*.yml",
+    "api:spec": "tsx scripts/openapi.ts",
+    "test:load": "tsx scripts/load.ts",
+    "backup": "bash scripts/backup.sh",
+    "test:restore": "bash scripts/restore-drill.sh",
+    "admin:provision": "tsx scripts/provision-admin.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/helmet": "^13.0.2",
+    "@fastify/multipart": "^10.1.6",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/static": "^10.1.8",
+    "@fastify/swagger": "^9.5.2",
+    "@fastify/swagger-ui": "^6.1.2",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.0",
+    "lucide-react": "^0.548.0",
+    "otpauth": "^9.5.2",
+    "pg": "^8.16.3",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sharp": "^0.35.5",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.9.1",
+    "@types/pg": "^8.15.5",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.0.4",
+    "concurrently": "^9.2.1",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12"
+  },
+  "overrides": {
+    "glob": "^14.0.3",
+    "minimatch": "^11.0.3"
+  }
+}

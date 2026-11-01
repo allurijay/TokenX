@@ -1,0 +1,10 @@
+{
+  "runAt": "2026-11-01T17:36:05.629Z",
+  "scenario": "50 concurrent quote/checkout/capture flows against real PostgreSQL; in-process HTTP injection",
+  "orders": 50,
+  "elapsedMs": 791,
+  "p50EndToEndMs": 571,
+  "p95EndToEndMs": 769,
+  "uniqueTokens": true,
+  "note": "Short concurrency smoke test, not the 30-minute capacity or external-network SLA certification."
+}

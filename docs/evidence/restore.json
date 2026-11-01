@@ -1,0 +1,7 @@
+{
+  "result": "passed",
+  "elapsedSeconds": 2,
+  "ordersRestored": 89,
+  "unbalancedTransactions": 0,
+  "scope": "Local PostgreSQL dump/restore; not managed-service PITR or production RPO certification"
+}

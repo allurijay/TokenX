@@ -1,0 +1,7 @@
+node_modules
+.git
+.env*
+var
+backups
+test-results
+apps/web/dist

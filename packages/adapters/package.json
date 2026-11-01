@@ -1,0 +1,6 @@
+{
+  "name": "@tokenex/adapters",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0"
+}

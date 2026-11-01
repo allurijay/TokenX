@@ -1,0 +1,2 @@
+CREATE TABLE payment_attempt(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),intent_id uuid NOT NULL REFERENCES payment_intent,provider_payment_id text NOT NULL UNIQUE,status text NOT NULL,amount_minor bigint NOT NULL CHECK(amount_minor>=0),currency text NOT NULL,error_code text,observed_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE settlement_line(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),batch_id uuid NOT NULL REFERENCES settlement_batch,journal_line_id uuid NOT NULL REFERENCES journal_line,UNIQUE(batch_id,journal_line_id));
